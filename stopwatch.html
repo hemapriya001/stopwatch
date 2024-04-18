@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <style>
+        .body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: black
+        }
+
+        .clock {
+            height: 40px;
+            width: 200px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 2px solid;
+            box-shadow: 2px 2px 4px burlywood;
+            color: beige;
+        }
+
+        button {
+            height: 30px;
+            width: auto;
+            margin: 60px 10px;
+            padding: 0 10px;
+            font-weight: 600;
+            background-color: darkkhaki;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div class="clock" id="a1">
+            <p><b>HH</b></p>
+            <p><b>MM</b></p>
+            <p><b>SS</b></p>
+        </div>
+        <div class="clock" id="a2">
+            <p id="p1"></p>
+            <p id="p2"></p>
+            <p id="p3"></p>
+        </div>
+        <div>
+            <button>Start</button>
+            <button>Pause</button>
+            <button>Restart</button>
+        </div>
+    </div>
+
+    <script>
+        let hr = 0, min = 0, sec = 0;
+        let hrInterval, minInterval, secInterval;
+
+        document.getElementById("p1").innerHTML = hr;
+        document.getElementById("p2").innerHTML = min;
+        document.getElementById("p3").innerHTML = sec;
+
+        let StartWatch = () => {
+
+            hrInterval = setInterval(() => {
+                hr++;
+                document.getElementById("p1").innerHTML = hr;
+                console.log("hr started")
+            }, 3600000)
+
+            minInterval = setInterval(() => {
+                min++;
+                document.getElementById("p2").innerHTML = min;
+                if (min == 60) {
+                    min = 0;
+                }
+                console.log("min started")
+            }, 60000)
+
+            secInterval = setInterval(() => {
+                sec++;
+                document.getElementById("p3").innerHTML = sec;
+                if (sec == 60) {
+                    sec = 0;
+                }
+                console.log("sec started")
+            }, 1000)
+        }
+
+        let StopWatch = () => {
+            clearInterval(hrInterval);
+            clearInterval(minInterval);
+            clearInterval(secInterval);
+            console.log("stopped")
+        }
+
+        let RestartWatch = () => {
+            StopWatch();
+            hr, min, sec = 0;
+            StartWatch();
+            console.log("restarted")
+        }
+
+
+        document.getElementsByTagName("button")[0].addEventListener("click", StartWatch)
+        document.getElementsByTagName("button")[1].addEventListener("click", StopWatch)
+        document.getElementsByTagName("button")[2].addEventListener("click", RestartWatch)
+    </script>
+</body>
+</html>
