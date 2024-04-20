@@ -66,6 +66,9 @@
         document.getElementById("p3").innerHTML = sec;
 
         let StartWatch = () => {
+            document.getElementById("p1").innerHTML = hr;
+            document.getElementById("p2").innerHTML = min;
+            document.getElementById("p3").innerHTML = sec;
 
             hrInterval = setInterval(() => {
                 hr++;
@@ -101,7 +104,7 @@
 
         let RestartWatch = () => {
             StopWatch();
-            hr, min, sec = 0;
+            hr = 0, min = 0, sec = 0;
             StartWatch();
             console.log("restarted")
         }
